@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -24,8 +26,11 @@ public class CourseController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<CourseDTO> getAll(){
-        return service.getAll();
+    public List<CourseDTO> getAll(@RequestParam(required = false) Integer points){
+        if(points == null) return service.getAll();
+        return service.getAll().stream()
+                .filter(courseDTO -> courseDTO.getStudyPoints() == points)
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

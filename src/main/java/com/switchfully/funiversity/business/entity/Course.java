@@ -12,9 +12,9 @@ public class Course {
     private final String id;
     private String professorId;
     private String name;
-    private int studyPoints;
+    private Integer studyPoints;
 
-    public Course(String name, String professorId, int studyPoints) {
+    public Course(String name, String professorId, Integer studyPoints) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.professorId = professorId;

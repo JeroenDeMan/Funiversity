@@ -49,7 +49,7 @@ public class CourseService {
 
     public CourseDTO addCourse(CourseDTO courseDTO){
         Course result = repository.save(mapper.toEntity(courseDTO));
-        return mapper.toDto(result);
+        return addProfessorName(mapper.toDto(result));
     }
 
     public CourseDTO updateCourse(String id, CourseDTO courseDTO){
@@ -64,7 +64,7 @@ public class CourseService {
     public CourseDTO deleteCourse(String id){
 
         Course result = repository.delete(id);
-        return mapper.toDto(result);
+        return addProfessorName(mapper.toDto(result));
     }
 
 }
